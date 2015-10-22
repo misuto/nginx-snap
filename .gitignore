@@ -1,3 +1,5 @@
+<<<<<<< Updated upstream
+=======
 # http://www.gnu.org/software/automake
 
 Makefile.in
@@ -12,3 +14,10 @@ Makefile.in
 /install-sh
 /missing
 /stamp-h1
+
+# for snapcraft
+>>>>>>> Stashed changes
+parts
+snap
+stage
+*.snap
