@@ -1,5 +1,5 @@
 name: nginx
-version: 8
+version: 10
 vendor: Leon Liao <leon.liao@canonical.com>
 summary: small, powerful, scalable web/proxy server
 description: Nginx ("engine X") is a high-performance web and reverse proxy server created by Igor Sysoev. It can be used both as a standalone web server and as a proxy to reduce the load on back-end HTTP or mail servers.
@@ -15,9 +15,9 @@ services:
       - chown32
       - close
       - setgid
-    start: "./bin/nginx.sh"
+    start: "./sbin/nginx"
     
-#    security-template: unconfined
+    security-template: unconfined
 #    security-policy: 
 #      apparmor: meta/apparmor.profile
 #      seccomp: meta/nginx.filter
