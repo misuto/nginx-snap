@@ -1,19 +1,39 @@
 name: nginx
-version: 2
+version: 8
 vendor: Leon Liao <leon.liao@canonical.com>
 summary: small, powerful, scalable web/proxy server
 description: Nginx ("engine X") is a high-performance web and reverse proxy server created by Igor Sysoev. It can be used both as a standalone web server and as a proxy to reduce the load on back-end HTTP or mail servers.
 icon: nginx.png
 
+services:
+  nginx:
+    caps:
+      - networking
+      - network-service
+    syscalls:
+      - chown
+      - chown32
+      - close
+      - setgid
+    start: "./bin/nginx.sh"
+    
+#    security-template: unconfined
+#    security-policy: 
+#      apparmor: meta/apparmor.profile
+#      seccomp: meta/nginx.filter
+
 parts:
   main:
     plugin: myautotools
-    source: https://github.com/nginx/nginx.git
+    #source: https://github.com/nginx/nginx.git
+    source: /home/ubuntu/git/nginx.git
     source-type: git
     source-tag: release-1.9.5
     configflags: 
         - --without-http_rewrite_module
         - --without-http_gzip_module
+        - --error-log-path=logs/error.log
+        - --http-log-path=logs/nginx.log
     build-packages:
         - libc6
         - libgd3
@@ -24,3 +44,9 @@ parts:
         - libxslt1.1
         - zlib1g
 
+  service:
+    plugin: copy
+    files:
+      nginx.sh: bin/nginx.sh
+      client_body_temp: client_body_temp
+      error.log: logs/error.log

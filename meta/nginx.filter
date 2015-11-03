@@ -1,0 +1,11 @@
+policy-vendor: ubuntu-core
+policy-version: 15.04
+security-template: default
+caps:
+  - networking
+  - network-service
+  - close
+syscalls:
+  - fchown
+  - fchown32
+  - close
